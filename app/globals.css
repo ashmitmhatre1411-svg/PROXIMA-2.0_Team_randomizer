@@ -1,0 +1,148 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+  --ink: #070a18;
+}
+
+html {
+  background: var(--ink);
+}
+
+body {
+  min-height: 100vh;
+  color: #e7eaf6;
+  background-color: var(--ink);
+  background-image:
+    radial-gradient(60rem 30rem at 12% -8%, rgba(91, 108, 255, 0.16), transparent 70%),
+    radial-gradient(48rem 26rem at 100% 0%, rgba(155, 109, 255, 0.1), transparent 70%);
+  background-repeat: no-repeat;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: rgba(91, 108, 255, 0.45);
+}
+
+@layer components {
+  .glass {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold uppercase tracking-wide transition-colors duration-150 disabled:cursor-not-allowed disabled:opacity-40;
+  }
+  .btn-primary {
+    @apply btn bg-accent text-white hover:bg-[#7080ff] active:bg-[#4a59e6];
+  }
+  .btn-ghost {
+    @apply btn border border-white/10 bg-white/[0.04] text-slate-100 hover:border-white/20 hover:bg-white/[0.08];
+  }
+  .btn-danger {
+    @apply btn border border-rose-400/30 bg-rose-500/10 text-rose-200 hover:bg-rose-500/20;
+  }
+}
+
+/* Keyboard focus ring that matches the palette */
+:where(a, button, input, [role="button"], [tabindex]):focus-visible {
+  outline: 2px solid #8b9bff;
+  outline-offset: 3px;
+  border-radius: 12px;
+}
+
+/* Team cards: hue is set per card through --h */
+.team-card {
+  border-top: 2px solid hsl(var(--h) 85% 68%);
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+.team-card:hover {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: hsl(var(--h) 85% 68% / 0.55);
+  border-top-color: hsl(var(--h) 85% 68%);
+}
+.team-badge {
+  background: hsl(var(--h) 85% 68% / 0.14);
+  color: hsl(var(--h) 90% 82%);
+}
+
+@keyframes card-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.card-in {
+  animation: card-in 0.45s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+@keyframes dot-in {
+  from {
+    opacity: 0;
+    transform: scale(0.2);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+.dot-in {
+  animation: dot-in 0.4s cubic-bezier(0.2, 0.9, 0.3, 1.4) both;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.fade-in {
+  animation: fade-in 0.4s ease both;
+}
+
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 10px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+.toast-in {
+  animation: toast-in 0.25s ease both;
+}
+
+.thin-scroll::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+.thin-scroll::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.14);
+  border-radius: 8px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
